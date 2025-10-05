@@ -1,9 +1,11 @@
 import { HttpClient } from "./http";
 import type {
+  AccountAPIResponse,
   ApplicationAPIResponse,
   ApplicationListResponse,
   ApplicationResponseListResponse,
   AuditLogListResponse,
+  DiscordIDResponse,
   JoinRequestAPIResponse,
   JoinRequestListResponse,
   LOAAPIResponse,
@@ -12,6 +14,7 @@ import type {
   LogListResponse,
   MemberAPIResponse,
   MemberListResponse,
+  RobloxConnectionAPIResponse,
   RoleAPIResponse,
   RoleListResponse,
   ServerAPIResponse,
@@ -330,6 +333,16 @@ export class MelonlyClient {
     );
   }
 
+  /**
+   * Retrieve Discord ID by member ID
+   * @param memberId - The member ID
+   * @returns Promise resolving to the Discord ID object
+   */
+  async getMemberDiscordIdByMemberId(memberId: string): Promise<DiscordIDResponse> {
+    validateId(memberId, "memberId");
+    return this.http.get(`/server/members/${encodeURIComponent(memberId)}/discord`);
+  }
+
   // --- Roles ---
 
   /**
@@ -372,5 +385,41 @@ export class MelonlyClient {
   async getShift(shiftId: string): Promise<ShiftAPIResponse> {
     validateId(shiftId, "shiftId");
     return this.http.get(`/server/shifts/${encodeURIComponent(shiftId)}`);
+  }
+
+    /**
+   * Retrieve all shifts for a specific member
+   * @param memberId - The member ID
+   * @param params - Pagination parameters
+   * @returns Promise resolving to member's shift list
+   */
+  async getUserShifts(
+    memberId: string,
+    params: PaginationParams = {},
+  ): Promise<ShiftListResponse> {
+    validateId(memberId, "memberId");
+    validatePaginationParams(params);
+    return this.http.get(`/server/shifts/user/${encodeURIComponent(memberId)}`, params);
+  }
+
+    // --- Verification ---
+  /**
+   * Retrieve Roblox connection linked to a Discord ID
+   * @param discordId - The Discord user ID
+   * @returns Promise resolving to Roblox connection details
+   */
+  async getRobloxConnectionByDiscordId(discordId: string): Promise<RobloxConnectionAPIResponse> {
+    validateId(discordId, "discordId");
+    return this.http.get(`/verification/discord/${encodeURIComponent(discordId)}/roblox`);
+  }
+
+  /**
+   * Retrieve Discord account linked to a Roblox ID
+   * @param robloxId - The Roblox user ID
+   * @returns Promise resolving to Discord account details
+   */
+  async getDiscordAccountByRobloxId(robloxId: string): Promise<AccountAPIResponse> {
+    validateId(robloxId, "robloxId");
+    return this.http.get(`/verification/roblox/${encodeURIComponent(robloxId)}/discord`);
   }
 }
