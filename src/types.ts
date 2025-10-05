@@ -452,6 +452,43 @@ export interface ShiftAPIResponse {
 export interface ShiftListResponse
   extends PaginatedResponse<ShiftAPIResponse> {}
 
+// === Verification Types ===
+
+/**
+ * Roblox connection details linked to a Discord ID
+ */
+export interface RobloxConnectionAPIResponse {
+  /** Unique Roblox user ID */
+  robloxId: string;
+  /** Associated Melonly user ID */
+  userId: string;
+  /** Timestamp when the record was created (Unix epoch) */
+  createdAt: number;
+  /** Timestamp of the most recent update (Unix epoch) */
+  lastUpdatedAt: number;
+  /** Roblox avatar headshot image metadata */
+  headShotImage: Record<string, unknown>;
+}
+
+/**
+ * Discord account details linked to a Roblox ID
+ */
+export interface AccountAPIResponse {
+  /** Roblox or external provider account ID */
+  providerAccountId: string;
+  /** Internal Melonly user ID */
+  userId: string;
+}
+
+/**
+ * Discord account identifier linked to a server member
+ */
+export interface DiscordIDResponse {
+  /** Discord user ID associated with the member */
+  discordId: string;
+}
+
+
 // === Utility Types ===
 
 /**
