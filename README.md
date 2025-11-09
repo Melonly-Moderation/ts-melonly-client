@@ -118,8 +118,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 💬 Support
 
 - Documentation: [https://melonly-api.readthedocs.io/](https://melonly-api.readthedocs.io/)
-- Issues: [https://github.com/Melonly-Moderation/ts-melonly-client/issues](https://github.com/ts-melonly-client/ts-melonly-client/issues)
-- Melonly API Documentation: [https://api.melonly.xyz/docs](https://api.melonly.xyz/docs)
+- Issues: [https://github.com/Melonly-Moderation/ts-melonly-client/issues](https://github.com/Melonly-Moderation/ts-melonly-client/issues)
+- Melonly API Documentation: [https://apidocs.melonly.xyz/](https://apidocs.melonly.xyz/)
 
 ---
 
